@@ -6,6 +6,8 @@ import Link from 'next/link'
 import siteConfig from '../config/siteConfig.js'
 import navLinks from '../config/navLinks.js'
 import nightwind from "nightwind/helper"
+import Toggle from './bits/Toggle'
+
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
@@ -53,9 +55,7 @@ export default function Nav() {
                       </Link>
                     ))}
 
-                  <button onClick={() => nightwind.toggle()} type="button" class="py-0 px-4  bg-pink-600 hover:bg-pink-700 focus:ring-pink-500 focus:ring-offset-pink-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-full">
-                      Toggle Theme
-                  </button>
+                  <Toggle className="my-auto" onToggle={nightwind.toggle} />
                 </div>
               </div>
             </div>

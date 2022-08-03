@@ -32,3 +32,8 @@ yarn-error.log*
 
 # vercel
 .vercel
+
+
+app
+ghost-docker-compose.yml
+strapi-docker-compose.yml
