@@ -9,14 +9,11 @@
     locales: ["en-US"],
     defaultLocale: "en-US",
   },
-  purge: {
-    content: [
-      './pages/**/*.{js,ts,jsx,tsx,md,mdx}', 
-      './components/**/*.{js,ts,jsx,tsx,md,mdx}',
-      './content/**/*.{js,ts,jsx,tsx,md,mdx}'
-    ],
-    // These options are passed through directly to PurgeCSS
-  },
+  content: [
+    './pages/**/*.{js,ts,jsx,tsx,md,mdx}', 
+    './components/**/*.{js,ts,jsx,tsx,md,mdx}',
+    './content/**/*.{js,ts,jsx,tsx,md,mdx}'
+  ],
   theme: {
     extend: {
       backgroundImage: (theme) => ({

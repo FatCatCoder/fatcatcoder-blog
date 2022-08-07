@@ -7,44 +7,39 @@ import fs from 'fs'
 import path from 'path'
 import matter from 'gray-matter'
 
-import { useFlexSearch } from 'react-use-flexsearch'
-
 export default function index({posts}) {
-    const el = useRef();
-    const q = gsap.utils.selector(el);
-    
     console.log(posts);
 
     const createElements = (items) => {
         let elements = [];
         items.forEach((x, y) => {
           elements.push(
-            <div key={`${y}-${Math.floor(Math.random() * 50)}`} ref={(ref) => refs.current.push(ref)}  class="blog-post flex flex-col bg-white shadow-lg border rounded-lg overflow-hidden">
-                <a href={`/blog/${x.slug}`} class="group h-48 md:h-64 block bg-gray-100 overflow-hidden relative">
-                <img src={x.frontmatter.img? x.frontmatter.img : "https://images.unsplash.com/photo-1593508512255-86ab42a8e620?auto=format&q=75&fit=crop&w=600"} loading="lazy" alt="Photo by Minh Pham" class="w-full h-full object-cover object-center absolute inset-0 group-hover:scale-110 transition duration-200" />
+            <div key={`${y}-${Math.floor(Math.random() * 50)}`} ref={(ref) => refs.current.push(ref)}  className="blog-post m-4 flex flex-col bg-white shadow-lg border rounded-lg overflow-hidden">
+                <a href={`/blog/${x.slug}`} className="group h-48 md:h-64 block bg-gray-100 overflow-hidden relative">
+                <img src={x.frontmatter.img? x.frontmatter.img : "https://images.unsplash.com/photo-1593508512255-86ab42a8e620?auto=format&q=75&fit=crop&w=600"} loading="lazy" alt="Photo by Minh Pham" className="w-full h-full object-cover object-center absolute inset-0 group-hover:scale-110 transition duration-200" />
                 </a>
 
-                <div class="flex flex-col flex-1 p-4 sm:p-6">
-                <h2 class="text-gray-800 text-lg font-semibold mb-2">
-                    <a href={`/blog/${x.slug}`} class="hover:text-indigo-500 active:text-indigo-600 transition duration-100">{x.frontmatter.title}</a>
+                <div className="flex flex-col flex-1 p-4 sm:p-6">
+                <h2 className="text-gray-800 text-lg font-semibold mb-2">
+                    <a href={`/blog/${x.slug}`} className="hover:text-indigo-500 active:text-indigo-600 transition duration-100">{x.frontmatter.title}</a>
                 </h2>
 
-                <p class="text-gray-500 mb-8">{x.frontmatter.description}</p>
+                <p className="text-gray-500 mb-8">{x.frontmatter.description}</p>
 
-                <div class="flex justify-between items-end mt-auto">
-                    <div class="flex items-center gap-2">
-                    <div class="w-10 h-10 shrink-0 bg-gray-100 rounded-full overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1611898872015-0571a9e38375?auto=format&q=75&fit=crop&w=64" loading="lazy" alt="Photo by Brock Wegner" class="w-full h-full object-cover object-center" />
+                <div className="flex justify-between items-end mt-auto">
+                    <div className="flex items-center gap-2">
+                    <div className="w-10 h-10 shrink-0 bg-gray-100 rounded-full overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1611898872015-0571a9e38375?auto=format&q=75&fit=crop&w=64" loading="lazy" alt="Photo by Brock Wegner" className="w-full h-full object-cover object-center" />
                     </div>
 
                     <div>
-                        <span class="block text-indigo-500">Mike Lane</span>
-                        <span class="block text-gray-400 text-sm">updated: {new Date(x.frontmatter.updated).toLocaleString()}</span>
-                        <p class="block text-gray-400 text-sm">created: {new Date(x.frontmatter.created).toLocaleString()}</p>
+                        <span className="block text-indigo-500">Mike Lane</span>
+                        <span className="block text-gray-400 text-sm">updated: {new Date(x.frontmatter.updated).toLocaleString()}</span>
+                        <p className="block text-gray-400 text-sm">created: {new Date(x.frontmatter.created).toLocaleString()}</p>
                     </div>
                     </div>
 
-                    {x?.frontmatter?.tags?.map(tag => (<span class="text-gray-500 text-sm border rounded px-2 py-1">{tag}</span>))}
+                    {x?.frontmatter?.tags?.map(tag => (<span className="text-gray-500 text-sm border rounded px-2 py-1">{tag}</span>))}
                 </div>
                 </div>
             </div>
@@ -96,7 +91,7 @@ export default function index({posts}) {
 
   return (
     <>
-    <div class="relative">
+    <div class="relative m-2 shadow-xl">
       <input onChange={search} value={query} type="text" id="rounded-email" class=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" placeholder="Search"/>
     </div>
 
@@ -115,8 +110,7 @@ export async function getStaticProps() {
 
   // Get slug and frontmatter from posts
   const posts = files.map((filename) => {
-    // Create slug
-    const slug = filename.replace('.md', '')
+    const slug = filename.endsWith(".md")? filename.replace('.md', ''): filename.replace('.mdx', '') // Create slug
 
     // Get frontmatter
     const markdownWithMeta = fs.readFileSync(

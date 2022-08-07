@@ -36,7 +36,7 @@ export default function Nav() {
                   <Link href="/">
                     <a>{siteConfig.title}</a>
                   </Link>
-                  <img src="fat-cat-silhouette-11.png" width={30} height={30} class="max-w-xs md:max-w-sm m-auto"/>
+                  <img src="fatcat-real.png" width={30} height={30} class="max-w-xs md:max-w-sm m-auto"/>
                 </div>
                 <div className="hidden sm:ml-6 sm:flex sm:space-x-8">
                   {/* Current: "border-indigo-500 text-gray-900", Default: "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700" */}
