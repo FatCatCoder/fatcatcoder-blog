@@ -2,13 +2,32 @@ import Head from 'next/head'
 import siteConfig from '../config/siteConfig'
 import useSWR from 'swr'
 import { genSlug } from '../lib/utils'
+import { useRef , useEffect} from 'react'
 
 import fs from 'fs'
 import path from 'path'
 import matter from 'gray-matter'
 
+import gsap from 'gsap'
+
 export default function Home({ posts }) {
   console.log(posts);
+  const ref = useRef(null);
+
+  useEffect(() => {
+    gsap.to(ref.current, {
+      y: 20,
+      duration: 2.5, 
+      repeat: -1,
+      yoyo: true,
+      ease: "sine.inOut"
+    })
+  }, [])
+
+  const splitText = (text) => {
+    return [...text].map(x => <span>{x}</span>)
+  }
+  
   return (
     <>
     <div class="container bg-white dark:bg-gray-800 mx-auto px-16">
@@ -17,11 +36,17 @@ export default function Home({ posts }) {
               <div class="sm:w-2/3 lg:w-2/5 flex flex-col relative z-20">
                   <span class="w-20 h-2 bg-gray-800 dark:bg-white mb-12">
                   </span>
-                  <h1 class="font-bebas-neue uppercase text-6xl sm:text-8xl font-black flex flex-col leading-none dark:text-white text-gray-800">
-                      FATCAT
+                  {/* <h1 ref={ref} class="font-bebas-neue uppercase text-6xl sm:text-8xl font-black flex flex-col leading-none dark:text-white text-gray-800">
+                       FATCAT
                       <span class="text-5xl sm:text-7xl">
                           CODER
                       </span>
+                  </h1> */}
+                  <h1 ref={ref} class="font-bebas-neue uppercase text-6xl sm:text-8xl font-black flex flex-inline leading-none dark:text-white text-gray-800">
+                       {splitText("FATCAT")}
+                  </h1>
+                  <h1 ref={ref} class="font-bebas-neue uppercase text-6xl sm:text-8xl font-black flex flex-inline leading-none dark:text-white text-gray-800">
+                       {splitText("CODER")}
                   </h1>
                   <p class="text-sm sm:text-base text-gray-700 dark:text-white">
                       Coding - Composing - Coffee 
@@ -39,7 +64,7 @@ export default function Home({ posts }) {
                 <div class="hidden sm:block sm:w-1/3 lg:w-3/5 relative">
                   <div class="flex justify-center">
                     <div class="rounded-lg shadow-lg bg-white max-w-sm">
-                      <a href="#!">
+                      <a href={"/blog/" + y.slug}>
                         <img class="rounded-t-lg" src="https://fatcatart.com/wp-content/gallery/dutch-still-life/cache/Heda-Still-Life-with-a-Lobster-cat.jpg-nggid03161-ngg0dyn-714x800x100-00f0w010c010r110f110r010t010.jpg"  alt=""/>
                         {/* src={y.frontmatter.img} */}
                       </a>
@@ -57,6 +82,7 @@ export default function Home({ posts }) {
           </div>
       </div>
 
+      <iframe width={500} height={500} src="https://embed.lottiefiles.com/animation/92104"></iframe>
 
       {posts.map((x,y) => (
         <div class="overflow-hidden shadow-lg rounded-lg h-90 w-60 md:w-80 cursor-pointer m-auto">
