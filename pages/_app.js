@@ -21,6 +21,7 @@ function MyApp({ Component, pageProps }) {
       } else {
         window.document.documentElement.classList.remove('dark')
     }
+    window.document.documentElement.classList.remove('dark');
     }
   }, [])
 

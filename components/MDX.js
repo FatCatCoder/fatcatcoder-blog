@@ -4,9 +4,12 @@ import Head from 'next/head'
 import Link from 'next/link'
 import { CopyBlock } from "react-code-blocks";
 
+import Quote  from '../components/bits/Quote'
+
 
 const components = {
   Head,
+  Quote: Quote
 }
 
 export default function MdxPage({ children, source, frontMatter }) {
@@ -24,7 +27,7 @@ export default function MdxPage({ children, source, frontMatter }) {
         </div>
       </header>
       <section>
-        <MDXRemote {...source} components={components} />
+        <MDXRemote {...source} components={{...components}} />
       </section>
     </article>
   )

@@ -1,25 +1,17 @@
 import Head from 'next/head'
-
 import siteConfig from '../config/siteConfig'
+import useSWR from 'swr'
+import { genSlug } from '../lib/utils'
 
-export default function Home() {
+import fs from 'fs'
+import path from 'path'
+import matter from 'gray-matter'
+
+export default function Home({ posts }) {
+  console.log(posts);
   return (
     <>
-      {/* <div className="text-center bg-white">
-        <h1 className="text-6xl bg-white font-bold mt-24 mb-8">
-          <a className="text-blue-600 bg-white" href="https://github.com/datopian/nextjs-tailwind-mdx">
-            {siteConfig.title}
-            <span className="inline-flex my-auto bg-white">
-
-            </span>
-          </a>
-        </h1>
-        <h2 className="text-4xl">
-          {siteConfig.tagline}
-        </h2>
-      </div> */}
-
-      
+    <div class="container bg-white dark:bg-gray-800 mx-auto px-16">
       <div class="bg-white dark:bg-gray-800 flex relative z-20 items-center overflow-hidden">
           <div class="container mx-auto px-6 flex relative py-16">
               <div class="sm:w-2/3 lg:w-2/5 flex flex-col relative z-20">
@@ -43,39 +35,75 @@ export default function Home() {
                       </a>
                   </div>
               </div>
-              <div class="hidden sm:block sm:w-1/3 lg:w-3/5 relative">
-                  <img src="https://images.unsplash.com/photo-1618489517022-5c31fa91d017?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80" class="max-w-xs md:max-w-sm m-auto"/>
-              </div>
+              {posts.filter(x => x.frontmatter.featured == true).map(y => (
+                <div class="hidden sm:block sm:w-1/3 lg:w-3/5 relative">
+                  <div class="flex justify-center">
+                    <div class="rounded-lg shadow-lg bg-white max-w-sm">
+                      <a href="#!">
+                        <img class="rounded-t-lg" src="https://fatcatart.com/wp-content/gallery/dutch-still-life/cache/Heda-Still-Life-with-a-Lobster-cat.jpg-nggid03161-ngg0dyn-714x800x100-00f0w010c010r110f110r010t010.jpg"  alt=""/>
+                        {/* src={y.frontmatter.img} */}
+                      </a>
+                      <div class="p-6">
+                        <h5 class="text-gray-900 text-xl font-medium mb-2">{y.frontmatter.title}</h5>
+                        <p class="text-gray-700 text-base mb-4">
+                          {y.frontmatter.description}
+                        </p>
+                        <button type="button" class=" inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out">Button</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
           </div>
       </div>
 
 
-      {/* <div class="bg-white pb-6 sm:pb-8 lg:pb-12">
-        <div class="max-w-screen-2xl px-4 md:px-8 mx-auto">
-          <header class="flex justify-between items-center py-4 md:py-8 mb-4">
-            <a href="/" class="inline-flex items-center text-black-800 text-2xl md:text-3xl font-bold gap-2.5" aria-label="logo">
-            
+      {posts.map((x,y) => (
+        <div class="overflow-hidden shadow-lg rounded-lg h-90 w-60 md:w-80 cursor-pointer m-auto">
+            <a href={`/blog/${x.slug}`} class="w-full block h-full">
+                <img alt="img" src={x?.frontmatter?.img} class="max-h-40 w-full object-cover"/>
+                <div class="bg-white dark:bg-gray-800 w-full p-4">
+                    <p class="text-indigo-500 text-md font-medium">
+                    </p>
+                    <p class="text-gray-800 dark:text-white text-xl font-medium mb-2">
+                        {x?.frontmatter?.title}
+                    </p>
+                    <p class="text-gray-400 dark:text-gray-300 font-light text-md">
+                        {x?.frontmatter?.description}
+                    </p>
+                </div>
             </a>
-          </header>
-
-          <section class="min-h-96 flex justify-center items-center flex-1 shrink-0 bg-gray-100 overflow-hidden shadow-lg rounded-lg relative py-16 md:py-20 xl:py-48">
-            <img src="https://images.unsplash.com/photo-1618004652321-13a63e576b80?auto=format&q=75&fit=crop&w=1500" loading="lazy" alt="Photo by Fakurian Design" class="w-full h-full object-cover object-center absolute inset-0" />
-
-            <div class="bg-indigo-500 mix-blend-multiply absolute inset-0"></div>
-
-            <div class="sm:max-w-xl flex flex-col items-center relative p-4">
-              <p class="text-indigo-200 text-lg sm:text-xl text-center mb-4 md:mb-8">Very proud to introduce</p>
-              <h1 class="text-white text-4xl sm:text-5xl md:text-6xl font-bold text-center mb-8 md:mb-12">Revolutionary way to build the web</h1>
-
-              <div class="w-full flex flex-col sm:flex-row sm:justify-center gap-2.5">
-                <a href="#" class="inline-block bg-indigo-500 hover:bg-indigo-600 active:bg-indigo-700 focus-visible:ring ring-indigo-300 text-white text-sm md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 px-8 py-3">Start now</a>
-
-                <a href="#" class="inline-block bg-gray-200 hover:bg-gray-300 focus-visible:ring ring-indigo-300 text-gray-500 active:text-gray-700 text-sm md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 px-8 py-3">Take tour</a>
-              </div>
-            </div>
-          </section>
         </div>
-      </div> */}
+      ))}
+      </div>
     </>
   )
 }
+
+  export async function getStaticProps() {
+    const dirname = "content";
+    // Get files from the posts dir
+    const files = fs.readdirSync(path.join(dirname))
+    // Get slug and frontmatter from posts
+    const posts = files.map((filename) => {
+      const slug = filename.replace('.md', '') // Create slug
+      // Get frontmatter
+      const markdownWithMeta = fs.readFileSync(
+        path.join(dirname, filename),
+        'utf-8'
+      )
+    
+      const { data: frontmatter } = matter(markdownWithMeta)
+
+      return {
+        slug,
+        frontmatter,
+      }
+    })
+  
+    return {
+      props: {
+        posts: posts,
+      },
+    }
+  }

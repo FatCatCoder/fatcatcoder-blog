@@ -1,4 +1,4 @@
-import { useEffect, useRef, React, useLayoutEffect, useMemo } from 'react'
+import { useState, useEffect, useRef, React, useLayoutEffect, useMemo } from 'react'
 import gsap  from 'gsap'
 import ScrollTrigger  from 'gsap/dist/ScrollTrigger';
 gsap.registerPlugin(ScrollTrigger);
@@ -7,15 +7,17 @@ import fs from 'fs'
 import path from 'path'
 import matter from 'gray-matter'
 
+import { useFlexSearch } from 'react-use-flexsearch'
+
 export default function index({posts}) {
     const el = useRef();
     const q = gsap.utils.selector(el);
     
-    // console.log(posts);
+    console.log(posts);
 
-    const createElements = () => {
+    const createElements = (items) => {
         let elements = [];
-        posts.forEach((x, y) => {
+        items.forEach((x, y) => {
           elements.push(
             <div key={`${y}-${Math.floor(Math.random() * 50)}`} ref={(ref) => refs.current.push(ref)}  class="blog-post flex flex-col bg-white shadow-lg border rounded-lg overflow-hidden">
                 <a href={`/blog/${x.slug}`} class="group h-48 md:h-64 block bg-gray-100 overflow-hidden relative">
@@ -27,7 +29,7 @@ export default function index({posts}) {
                     <a href={`/blog/${x.slug}`} class="hover:text-indigo-500 active:text-indigo-600 transition duration-100">{x.frontmatter.title}</a>
                 </h2>
 
-                <p class="text-gray-500 mb-8">This is a section of some simple filler text, also known as placeholder text. It shares some characteristics of a real written text.</p>
+                <p class="text-gray-500 mb-8">{x.frontmatter.description}</p>
 
                 <div class="flex justify-between items-end mt-auto">
                     <div class="flex items-center gap-2">
@@ -37,11 +39,12 @@ export default function index({posts}) {
 
                     <div>
                         <span class="block text-indigo-500">Mike Lane</span>
-                        <span class="block text-gray-400 text-sm">July 19, 2021</span>
+                        <span class="block text-gray-400 text-sm">updated: {new Date(x.frontmatter.updated).toLocaleString()}</span>
+                        <p class="block text-gray-400 text-sm">created: {new Date(x.frontmatter.created).toLocaleString()}</p>
                     </div>
                     </div>
 
-                    <span class="text-gray-500 text-sm border rounded px-2 py-1">Article</span>
+                    {x?.frontmatter?.tags?.map(tag => (<span class="text-gray-500 text-sm border rounded px-2 py-1">{tag}</span>))}
                 </div>
                 </div>
             </div>
@@ -51,8 +54,25 @@ export default function index({posts}) {
         return elements;
       };
 
-    const arr = createElements();
-    const refs = useRef([]);
+      const [blogs, setBlogs] = useState(createElements(posts));
+      const [query, setQuery] = useState("")
+      const refs = useRef([]);
+      
+      const search = (e) => {
+        let text = e.target.value
+
+        refs.current = [];
+
+
+        let filteredPosts = posts.filter((x) => {
+          if(x.frontmatter.title.toLowerCase().includes(text.toLowerCase()))
+            return true
+            else return false
+        })
+
+        setQuery(text)
+        setBlogs(createElements(filteredPosts));
+      }
     
 
     useLayoutEffect(()=> {
@@ -72,44 +92,18 @@ export default function index({posts}) {
                 opacity: 1, // also tested without this line
               });
         })
-      },[])
-      // [refs, arr]
-
-
-      // let postsRef = useRef();
-
-
-      // let onMouseOver = (el) => {
-      //   gsap.to(el.target, { duration: 0.5, scale: 1.3, ease: "power4" });
-      // };
-    
-      // let onMouseOut = (el) => {
-      //   gsap.to(el.target, { duration: 0.5, scale: 1, ease: "power4" });
-      // };
-    
-      // useEffect(() => {
-      //   postsRef.current = gsap.utils.toArray(".blog-post");
-      //   gsap.set(postsRef.current, { autoAlpha: 0, scale: 0 });
-      //   setTimeout(() => {
-      //     gsap.to(postsRef.current, {
-      //       autoAlpha: 1,
-      //       scale: 1,
-      //       delay: 5,
-      //       scrollTrigger: {
-      //         trigger: ".blog-post",
-      //         scrub: 1,
-      //         start: "top top",
-      //         markers: true,
-      //         end: "+=100%"
-      //       }
-      //     });
-      //   });
-      // }, []);
+      }, [refs, query])
 
   return (
-    <div class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-2 gap-4 md:gap-6 xl:gap-8">
-        {arr}
+    <>
+    <div class="relative">
+      <input onChange={search} value={query} type="text" id="rounded-email" class=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" placeholder="Search"/>
     </div>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-2 gap-4 md:gap-6 xl:gap-8">
+        {blogs}
+    </div>
+    </>
   )
 }
 
