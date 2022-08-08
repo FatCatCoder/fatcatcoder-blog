@@ -9,6 +9,9 @@ import nightwind from "nightwind/helper"
 import '../styles/global.css'
 import 'tailwindcss/tailwind.css'
 
+import { TransitionProvider } from "../components/TransitionContext"
+import TransitionLayout from "../components/TransitionLayout"
+
 function MyApp({ Component, pageProps }) {
 
   useEffect(() => {
@@ -37,10 +40,15 @@ function MyApp({ Component, pageProps }) {
       <script dangerouslySetInnerHTML={{ __html: nightwind.init() }} />
       </Head>
       
+      <TransitionProvider>
+      <TransitionLayout>
+        
       <Layout title={pageProps.title}>
         <Component {...pageProps} />
       </Layout>
-     
+
+      </TransitionLayout>
+      </TransitionProvider>
     </>
   )
 }

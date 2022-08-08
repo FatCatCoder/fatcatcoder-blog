@@ -4,6 +4,8 @@ import useSWR from 'swr'
 import { genSlug } from '../lib/utils'
 import { useRef , useEffect, useLayoutEffect} from 'react'
 
+import FadeInOut from '../components/FadeInOut'
+
 import fs from 'fs'
 import path from 'path'
 import matter from 'gray-matter'
@@ -36,6 +38,7 @@ export default function Home({ posts }) {
   
   return (
     <>
+    <FadeInOut x={-20} delay={2}>
     <div class="container bg-white dark:bg-gray-800 mx-auto my-8 px-16">
       <div class="bg-white dark:bg-gray-800 flex relative z-20 items-center overflow-hidden">
           <div class="container mx-auto px-6 flex relative py-16">
@@ -197,6 +200,7 @@ export default function Home({ posts }) {
         </div>
       ))}
       </div>
+      </FadeInOut >
     </>
   )
 }

@@ -4,10 +4,15 @@ import path from 'path'
 import parse from '../../lib/mdx.js'
 import MdxPage from '../../components/MDX'
 
+import FadeInOut from '../../components/FadeInOut.js'
+import Link from 'next/link'
+
 
 export default function Page({ source, frontMatter, title }) {
   return (
+    <FadeInOut>
     <MdxPage source={source} frontMatter={frontMatter} />
+    </FadeInOut>
   )
 }
 
