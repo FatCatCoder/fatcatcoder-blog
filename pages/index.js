@@ -3,6 +3,7 @@ import siteConfig from '../config/siteConfig'
 import useSWR from 'swr'
 import { genSlug } from '../lib/utils'
 import { useRef , useEffect, useLayoutEffect} from 'react'
+import Link from 'next/link'
 
 import FadeInOut from '../components/FadeInOut'
 
@@ -55,16 +56,20 @@ export default function Home({ posts }) {
                       Coding - Composing - Coffee 
                   </p>
                   <div class="flex mt-8">
-                      <a href="#" class="uppercase py-2 px-4 rounded-lg bg-pink-500 border-2 border-transparent text-white text-md mr-4 hover:bg-pink-400">
-                          Start Reading
-                      </a>
-                      <a href="#" class="uppercase py-2 px-4 rounded-lg bg-transparent border-2 border-pink-500 text-pink-500 dark:text-white hover:bg-pink-500 hover:text-white text-md">
-                          About Me
-                      </a>
+                      <Link href="/blog">
+                        <a class="uppercase py-2 px-4 rounded-lg bg-pink-500 border-2 border-transparent text-white text-md mr-4 hover:bg-pink-400">
+                            Start Reading
+                        </a>
+                      </Link>
+                      <Link href="/about">
+                        <a class="uppercase py-2 px-4 rounded-lg bg-transparent border-2 border-pink-500 text-pink-500 dark:text-white hover:bg-pink-500 hover:text-white text-md">
+                            About
+                        </a>
+                      </Link>
                   </div>
               </div>
 
-              <div class="w-1/2 mx-auto invisible md:visible">
+              {/* <div class="w-1/2 mx-auto invisible md:visible">
                 <div class="w-full shadow-2xl subpixel-antialiased rounded h-64 bg-black border-black mx-auto">
                   <div class="flex items-center h-6 rounded-t bg-gray-100 border-b border-gray-500 text-center text-black" id="headerTerminal">
                     <div class="flex ml-2 items-center text-center border-red-900 bg-red-500 shadow-inner rounded-full w-3 h-3" id="closebtn">
@@ -83,15 +88,17 @@ export default function Home({ posts }) {
                     <p class="pb-1">FatCatAdmin:DevProjects fatcatadmin$ docker ps</p>
                   </div>
                 </div> 
-              </div>
+              </div> */}
 
               {posts.filter(x => x.frontmatter.featured == true).map(y => (
                 <div class="hidden sm:block sm:w-1/3 lg:w-3/5 relative">
                   <div class="flex justify-center">
                     <div class="rounded-lg shadow-lg bg-white max-w-sm">
-                      <a href={"/blog/" + y.slug}>
-                        <img class="rounded-t-lg" src="https://fatcatart.com/wp-content/gallery/dutch-still-life/cache/Heda-Still-Life-with-a-Lobster-cat.jpg-nggid03161-ngg0dyn-714x800x100-00f0w010c010r110f110r010t010.jpg"  alt=""/>
-                      </a>
+                      <Link href={"/blog/" + y.slug}>
+                        <a>
+                          <img class="rounded-t-lg" src={"fatty.jpg"}  alt=""/>
+                        </a>
+                      </Link>
                       <div class="p-6">
                         <h5 class="text-gray-900 text-xl font-medium mb-2">{y.frontmatter.title}</h5>
                         <p class="text-gray-700 text-base mb-4">
@@ -107,82 +114,110 @@ export default function Home({ posts }) {
       </div>
 
 
-      <div class="bg-white py-6 sm:py-8 lg:py-12">
-  <div class="max-w-screen-2xl px-4 md:px-8 mx-auto">
-    
-    <div class="mb-10 md:mb-16">
-      <h2 class="text-gray-800 text-2xl lg:text-3xl font-bold text-center mb-4 md:mb-6">Recent Posts</h2>
+      {/* <div class="bg-white py-6 sm:py-8 lg:py-12">
+        <div class="max-w-screen-2xl px-4 md:px-8 mx-auto">
+        
+          <div class="mb-10 md:mb-16">
+            <h2 class="text-gray-800 text-2xl lg:text-3xl font-bold text-center mb-4 md:mb-6">Recent Posts</h2>
 
-      <p class="max-w-screen-md text-gray-500 md:text-lg text-center mx-auto">This is a section of some simple filler text, also known as placeholder text. It shares some characteristics of a real written text but is random or otherwise generated.</p>
+            <p class="max-w-screen-md text-gray-500 md:text-lg text-center mx-auto">This is a section of some simple filler text, also known as placeholder text. It shares some characteristics of a real written text but is random or otherwise generated.</p>
+          </div>
+      
+
+          <div class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6 xl:gap-8">
+            
+            <a href="#" class="group h-48 md:h-64 xl:h-96 flex flex-col bg-gray-100 rounded-lg shadow-lg overflow-hidden relative">
+              <img src="https://images.unsplash.com/photo-1593508512255-86ab42a8e620?auto=format&q=75&fit=crop&w=600" loading="lazy" alt="Photo by Minh Pham" class="w-full h-full object-cover object-center absolute inset-0 group-hover:scale-110 transition duration-200" />
+
+              <div class="bg-gradient-to-t from-gray-800 md:via-transparent to-transparent absolute inset-0 pointer-events-none"></div>
+
+              <div class="relative p-4 mt-auto">
+                <span class="block text-gray-200 text-sm">July 19, 2021</span>
+                <h2 class="text-white text-xl font-semibold transition duration-100 mb-2">New trends in Tech</h2>
+
+                <span class="text-indigo-300 font-semibold">Read more</span>
+              </div>
+            </a>
+            
+
+            
+            <a href="#" class="group h-48 md:h-64 xl:h-96 flex flex-col bg-gray-100 rounded-lg shadow-lg overflow-hidden relative">
+              <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&q=75&fit=crop&w=600" loading="lazy" alt="Photo by Lorenzo Herrera" class="w-full h-full object-cover object-center absolute inset-0 group-hover:scale-110 transition duration-200" />
+
+              <div class="bg-gradient-to-t from-gray-800 md:via-transparent to-transparent absolute inset-0 pointer-events-none"></div>
+
+              <div class="relative p-4 mt-auto">
+                <span class="block text-gray-200 text-sm">April 07, 2021</span>
+                <h2 class="text-white text-xl font-semibold transition duration-100 mb-2">Working with legacy stacks</h2>
+
+                <span class="text-indigo-300 font-semibold">Read more</span>
+              </div>
+            </a>
+            
+
+            
+            <a href="#" class="group h-48 md:h-64 xl:h-96 flex flex-col bg-gray-100 rounded-lg shadow-lg overflow-hidden relative">
+              <img src="https://images.unsplash.com/photo-1542759564-7ccbb6ac450a?auto=format&q=75&fit=crop&w=600" loading="lazy" alt="Photo by Magicle" class="w-full h-full object-cover object-center absolute inset-0 group-hover:scale-110 transition duration-200" />
+
+              <div class="bg-gradient-to-t from-gray-800 md:via-transparent to-transparent absolute inset-0 pointer-events-none"></div>
+
+              <div class="relative p-4 mt-auto">
+                <span class="block text-gray-200 text-sm">March 15, 2021</span>
+                <h2 class="text-white text-xl font-semibold transition duration-100 mb-2">10 best smartphones for devs</h2>
+
+                <span class="text-indigo-300 font-semibold">Read more</span>
+              </div>
+            </a>
+            
+
+            
+            <a href="#" class="group h-48 md:h-64 xl:h-96 flex flex-col bg-gray-100 rounded-lg shadow-lg overflow-hidden relative">
+              <img src="https://images.unsplash.com/photo-1610465299996-30f240ac2b1c?auto=format&q=75&fit=crop&w=600" loading="lazy" alt="Photo by Martin Sanchez" class="w-full h-full object-cover object-center absolute inset-0 group-hover:scale-110 transition duration-200" />
+
+              <div class="bg-gradient-to-t from-gray-800 md:via-transparent to-transparent absolute inset-0 pointer-events-none"></div>
+
+              <div class="relative p-4 mt-auto">
+                <span class="block text-gray-200 text-sm">January 27, 2021</span>
+                <h2 class="text-white text-xl font-semibold transition duration-100 mb-2">8 High performance Notebooks</h2>
+
+                <span class="text-indigo-300 font-semibold">Read more</span>
+              </div>
+            </a>
+            
+          </div>
+        </div>
+    </div> */}
+
+<div class="bg-white py-6 sm:py-8 lg:py-12">
+        <div class="max-w-screen-2xl px-4 md:px-8 mx-auto">
+        
+          <div class="mb-10 md:mb-16">
+            <h2 class="text-gray-800 text-2xl lg:text-3xl font-bold text-center mb-4 md:mb-6">Recent Posts</h2>
+
+            <p class="max-w-screen-md text-gray-500 md:text-lg text-center mx-auto">This is a section of some simple filler text, also known as placeholder text. It shares some characteristics of a real written text but is random or otherwise generated.</p>
+          </div>
+      
+
+          <div class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6 xl:gap-8">
+            {posts.map((x, y) => (
+              <Link href={`/blog/${x.slug}`}>
+                <a class="group h-48 md:h-64 xl:h-96 flex flex-col bg-gray-100 rounded-lg shadow-lg overflow-hidden relative">
+                  <img src={x.frontmatter.img} loading="lazy" alt="Photo by Minh Pham" class="w-full h-full object-cover object-center absolute inset-0 group-hover:scale-110 transition duration-200" />
+                  <div class="bg-gradient-to-t from-gray-800 md:via-transparent to-transparent absolute inset-0 pointer-events-none"></div>
+                  <div class="relative p-4 mt-auto">
+                    <span class="block text-gray-200 text-sm">{x.frontmatter.created}</span>
+                    <h2 class="text-white text-xl font-semibold transition duration-100 mb-2">{x.frontmatter.title}</h2>
+                    <span class="text-indigo-300 font-semibold">Read more</span>
+                  </div>
+                </a>
+              </Link>
+            ))}
+          </div>
+        </div>
     </div>
-    
-
-    <div class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6 xl:gap-8">
-      
-      <a href="#" class="group h-48 md:h-64 xl:h-96 flex flex-col bg-gray-100 rounded-lg shadow-lg overflow-hidden relative">
-        <img src="https://images.unsplash.com/photo-1593508512255-86ab42a8e620?auto=format&q=75&fit=crop&w=600" loading="lazy" alt="Photo by Minh Pham" class="w-full h-full object-cover object-center absolute inset-0 group-hover:scale-110 transition duration-200" />
-
-        <div class="bg-gradient-to-t from-gray-800 md:via-transparent to-transparent absolute inset-0 pointer-events-none"></div>
-
-        <div class="relative p-4 mt-auto">
-          <span class="block text-gray-200 text-sm">July 19, 2021</span>
-          <h2 class="text-white text-xl font-semibold transition duration-100 mb-2">New trends in Tech</h2>
-
-          <span class="text-indigo-300 font-semibold">Read more</span>
-        </div>
-      </a>
-      
-
-      
-      <a href="#" class="group h-48 md:h-64 xl:h-96 flex flex-col bg-gray-100 rounded-lg shadow-lg overflow-hidden relative">
-        <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&q=75&fit=crop&w=600" loading="lazy" alt="Photo by Lorenzo Herrera" class="w-full h-full object-cover object-center absolute inset-0 group-hover:scale-110 transition duration-200" />
-
-        <div class="bg-gradient-to-t from-gray-800 md:via-transparent to-transparent absolute inset-0 pointer-events-none"></div>
-
-        <div class="relative p-4 mt-auto">
-          <span class="block text-gray-200 text-sm">April 07, 2021</span>
-          <h2 class="text-white text-xl font-semibold transition duration-100 mb-2">Working with legacy stacks</h2>
-
-          <span class="text-indigo-300 font-semibold">Read more</span>
-        </div>
-      </a>
-      
-
-      
-      <a href="#" class="group h-48 md:h-64 xl:h-96 flex flex-col bg-gray-100 rounded-lg shadow-lg overflow-hidden relative">
-        <img src="https://images.unsplash.com/photo-1542759564-7ccbb6ac450a?auto=format&q=75&fit=crop&w=600" loading="lazy" alt="Photo by Magicle" class="w-full h-full object-cover object-center absolute inset-0 group-hover:scale-110 transition duration-200" />
-
-        <div class="bg-gradient-to-t from-gray-800 md:via-transparent to-transparent absolute inset-0 pointer-events-none"></div>
-
-        <div class="relative p-4 mt-auto">
-          <span class="block text-gray-200 text-sm">March 15, 2021</span>
-          <h2 class="text-white text-xl font-semibold transition duration-100 mb-2">10 best smartphones for devs</h2>
-
-          <span class="text-indigo-300 font-semibold">Read more</span>
-        </div>
-      </a>
-      
-
-      
-      <a href="#" class="group h-48 md:h-64 xl:h-96 flex flex-col bg-gray-100 rounded-lg shadow-lg overflow-hidden relative">
-        <img src="https://images.unsplash.com/photo-1610465299996-30f240ac2b1c?auto=format&q=75&fit=crop&w=600" loading="lazy" alt="Photo by Martin Sanchez" class="w-full h-full object-cover object-center absolute inset-0 group-hover:scale-110 transition duration-200" />
-
-        <div class="bg-gradient-to-t from-gray-800 md:via-transparent to-transparent absolute inset-0 pointer-events-none"></div>
-
-        <div class="relative p-4 mt-auto">
-          <span class="block text-gray-200 text-sm">January 27, 2021</span>
-          <h2 class="text-white text-xl font-semibold transition duration-100 mb-2">8 High performance Notebooks</h2>
-
-          <span class="text-indigo-300 font-semibold">Read more</span>
-        </div>
-      </a>
-      
-    </div>
-  </div>
-</div>
 
 
-      {posts.map((x,y) => (
+      {/* {posts.map((x,y) => (
         <div class="overflow-hidden shadow-lg rounded-lg h-90 w-60 md:w-80 cursor-pointer m-auto">
             <a href={`/blog/${x.slug}`} class="w-full block h-full">
                 <img alt="img" src={x?.frontmatter?.img} class="max-h-40 w-full object-cover"/>
@@ -198,7 +233,8 @@ export default function Home({ posts }) {
                 </div>
             </a>
         </div>
-      ))}
+      ))} */}
+      
       </div>
       </FadeInOut >
     </>

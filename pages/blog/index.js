@@ -97,13 +97,26 @@ export default function index({posts}) {
   return (
     <>
     <FadeInOut x={-20} delay={2}>
-    <div class="relative m-2 shadow-xl">
-      <input onChange={search} value={query} type="text" id="rounded-email" class=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" placeholder="Search"/>
-    </div>
+    
+      <div class="container p-8 mx-auto">
+        <div class="mb-10 md:mb-16">
+          <h2 class="text-gray-800 text-2xl lg:text-3xl font-bold text-center mb-4 md:mb-6">
+            Blog
+          </h2>
+          <p class="max-w-screen-md text-gray-500 md:text-lg text-center mx-auto">
+            Articles, tutorials, projects & other content...
+          </p>
+      </div>
+        <div class="relative shadow-xl">
+          <input onChange={search} value={query} type="text" id="rounded-email" class="rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" placeholder="Search"/>
+        </div>
+      </div>
 
-    <div class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-2 gap-4 md:gap-6 xl:gap-8">
-        {blogs}
-    </div>
+      <div class="container mx-auto">
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-2 gap-4 md:gap-6 xl:gap-8">
+            {blogs}
+        </div>
+      </div>
     </FadeInOut>
     </>
   )

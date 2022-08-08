@@ -10,8 +10,8 @@ import Link from 'next/link'
 
 export default function Page({ source, frontMatter, title }) {
   return (
-    <FadeInOut>
-    <MdxPage source={source} frontMatter={frontMatter} />
+    <FadeInOut x={-20} delay={2}>
+      <MdxPage source={source} frontMatter={frontMatter} />
     </FadeInOut>
   )
 }

@@ -16,6 +16,7 @@ const FadeInOut = ({ children, delay, x, y, durationIn, durationOut }) => (
     }}
     to={{
       opacity: 1,
+      duration: 1,
       x: 0,
       y: 0,
       ease: "power4.inOut",
