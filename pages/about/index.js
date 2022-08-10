@@ -1,6 +1,8 @@
 import React from 'react'
 import FadeInOut from '../../components/FadeInOut'
 
+import { SiBlazor } from "react-icons/si";
+
 export default function About() {
   return (
     <>
@@ -11,10 +13,10 @@ export default function About() {
         <div class="text-center lg:w-2/3 w-full">
           <h1 class="title-font sm:text-4xl text-3xl mb-4 font-medium text-gray-900">About</h1>
           <blockquote class="text-gray-500 sm:text-lg italic border-l-4 pl-4 md:pl-6 mb-6 md:mb-8">
-            “Just a fat cat looking for a snack and some cash”
+            “A fullstack developer looking to give back to the community.”
           </blockquote>
           <p class="mb-8 leading-relaxed">
-            Haha, no. I'm really just a fullstack developer looking to give back to the community by sharing what I've learned.
+          By sharing what I've learned, I hope you too can continue to succeed.
           </p>
 
           <ul className="list-disc list-inside text-start text-gray-500 sm:text-lg mb-6 md:mb-8">
@@ -22,7 +24,7 @@ export default function About() {
             <li>Javascript / Typescript</li>
             <li>Node.js</li>
             <li>React / Next.js</li>
-            <li>Blazor Web Assembly</li>
+            <li><span><SiBlazor /> Blazor Web Assembly</span></li>
             <li>Devops with scripting langs (powershell, bash)</li>
           </ul>
           

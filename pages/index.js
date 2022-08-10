@@ -40,8 +40,8 @@ export default function Home({ posts }) {
   return (
     <>
     <FadeInOut x={-20} delay={2}>
-    <div class="container bg-white dark:bg-gray-800 mx-auto my-8 px-16">
-      <div class="bg-white dark:bg-gray-800 flex relative z-20 items-center overflow-hidden">
+    <div class="container bg-white dark:bg-gray-900 mx-auto my-8 px-16">
+      <div class="bg-white dark:bg-gray-900 flex relative z-20 items-center overflow-hidden">
           <div class="container mx-auto px-6 flex relative py-16">
               <div class="sm:w-2/3 lg:w-2/5 flex flex-col relative z-20">
                   <span class="w-20 h-2 bg-gray-800 dark:bg-white mb-12">
@@ -69,7 +69,7 @@ export default function Home({ posts }) {
                   </div>
               </div>
 
-              {/* <div class="w-1/2 mx-auto invisible md:visible">
+              <div class="w-1/2 mx-auto invisible md:visible">
                 <div class="w-full shadow-2xl subpixel-antialiased rounded h-64 bg-black border-black mx-auto">
                   <div class="flex items-center h-6 rounded-t bg-gray-100 border-b border-gray-500 text-center text-black" id="headerTerminal">
                     <div class="flex ml-2 items-center text-center border-red-900 bg-red-500 shadow-inner rounded-full w-3 h-3" id="closebtn">
@@ -88,9 +88,9 @@ export default function Home({ posts }) {
                     <p class="pb-1">FatCatAdmin:DevProjects fatcatadmin$ docker ps</p>
                   </div>
                 </div> 
-              </div> */}
+              </div>
 
-              {posts.filter(x => x.frontmatter.featured == true).map(y => (
+              {/* {posts.filter(x => x.frontmatter.featured == true).map(y => (
                 <div class="hidden sm:block sm:w-1/3 lg:w-3/5 relative">
                   <div class="flex justify-center">
                     <div class="rounded-lg shadow-lg bg-white max-w-sm">
@@ -109,7 +109,7 @@ export default function Home({ posts }) {
                     </div>
                   </div>
                 </div>
-              ))}
+              ))} */}
           </div>
       </div>
 

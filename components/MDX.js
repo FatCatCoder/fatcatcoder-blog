@@ -14,7 +14,7 @@ const components = {
 
 export default function MdxPage({ children, source, frontMatter }) {
   return (
-    <article className="prose mx-auto p-6">
+    <article className="prose mx-auto p-6 min-w-[45vw]">
       <header>
         <div className="mb-6">
           <h1>{frontMatter.title}</h1>
