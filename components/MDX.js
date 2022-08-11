@@ -5,11 +5,13 @@ import Link from 'next/link'
 import { CopyBlock } from "react-code-blocks";
 
 import Quote  from '../components/bits/Quote'
+import Quoteblock  from '../components/bits/Quoteblock'
 
 
 const components = {
   Head,
-  Quote: Quote
+  Quote: Quote,
+  Quoteblock: Quoteblock
 }
 
 export default function MdxPage({ children, source, frontMatter }) {

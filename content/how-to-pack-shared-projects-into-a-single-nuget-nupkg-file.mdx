@@ -24,13 +24,11 @@ nuget file.
 
 
 ## HOW
-Okay heres the result
-
 ```xml
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <!-- Your Properties Here -->
-	<Name>LibraryProject</Name>
+	  <Name>LibraryProject</Name>
     <TargetsForTfmSpecificBuildOutput>
     $(TargetsForTfmSpecificBuildOutput);CopyProjectReferencesToPackage
     <TargetsForTfmSpecificBuildOutput>
@@ -60,19 +58,18 @@ Okay heres the result
 ## Deep Dives 🌊
 What the !%#&@ is *[TargetsForTfmSpecificBuildOutput](https://docs.microsoft.com/en-us/nuget/reference/msbuild-targets#targetsfortfmspecificbuildoutput)*???
 
+*Adds .dlls from a path into the .nupkg file (which to put crudely, a zip folder with metadata)*
+<Quoteblock body={"Adds .dlls from a path into the .nupkg file (which to put crudely, a zip folder with metadata)"} />
+
+The other two item groups are msbuild variations to ensure that TargetsForTfmSpecificBuildOutput collects the correct
+.dll file AND all of its own references! hate to be missing a third data package nested inside out lovely LibraryProject.Data.csproj
 
 
+### HOW DEEP DOES IT GO?
 
-<div class="max-w-4xl p-4 text-gray-800 bg-white rounded-lg shadow">
-  <div class="mb-2">
-    <div class="h-3 text-3xl text-left text-gray-600">“</div>
-    <p class="px-4 text-sm text-center text-gray-600">
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nam obcaecati
-      laudantium recusandae, debitis eum voluptatem ad, illo voluptatibus
-      temporibus odio provident.
-    </p>
-    <div class="h-3 text-3xl text-right text-gray-600">”</div>
-  </div>
-</div>
+As far as you're little heart can carry you. Really that means you should look into MSBuild Targets.
+A Target is a groups of tasks to be ran at a certain build stage. 
+You can reference MSB variables in these targets to do cool things like the "ReferenceCopyLocalPaths" var allows you
+to gather the array of matched items and operate on it (in our case pack them into a single nuget for portability!)
 
-<Quote />
+

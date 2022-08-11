@@ -1,5 +1,8 @@
 import React from 'react'
 
+/** Styled box
+ * @params body: string
+ */
 export default function Quoteblock(props) {
   return (
     <div class="max-w-4xl p-4 text-gray-800 bg-white rounded-lg shadow">
