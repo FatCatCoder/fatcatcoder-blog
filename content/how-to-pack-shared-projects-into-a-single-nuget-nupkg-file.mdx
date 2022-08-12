@@ -68,7 +68,7 @@ The other two item groups are msbuild variations to ensure that TargetsForTfmSpe
 ### HOW DEEP DOES IT GO?
 
 As far as you're little heart can carry you. Really that means you should look into MSBuild Targets.
-A Target is a groups of tasks to be ran at a certain build stage. 
+A Target groups tasks to be ran together at a certain build stage. 
 You can reference MSB variables in these targets to do cool things like the "ReferenceCopyLocalPaths" var allows you
 to gather the array of matched items and operate on it (in our case pack them into a single nuget for portability!)
 
