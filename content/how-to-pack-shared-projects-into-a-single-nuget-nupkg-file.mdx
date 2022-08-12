@@ -13,7 +13,7 @@ featured: true
 Lets say you have a dotnet solution containg more than one project. You need to pack these projects into a single
 nuget file. 
 
-```
+```bash
 .
 ├── MySharedProject/
 │   └── *.csproj
@@ -21,7 +21,6 @@ nuget file.
 │   └── *.Data.csproj
 └── MySharedProject.sln
 ```
-
 
 ## HOW
 ```xml
@@ -73,3 +72,4 @@ You can reference MSB variables in these targets to do cool things like the "Ref
 to gather the array of matched items and operate on it (in our case pack them into a single nuget for portability!)
 
 
+<ProfileCard />

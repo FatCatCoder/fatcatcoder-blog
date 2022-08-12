@@ -1,4 +1,4 @@
-import { Fragment } from 'react'
+import { Fragment, useState } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { BellIcon, MenuIcon, XIcon } from '@heroicons/react/outline'
 import Link from 'next/link'
@@ -13,6 +13,13 @@ function classNames(...classes) {
 }
 
 export default function Nav() {
+  const [isDarkMode, setIsDarkMode] = useState(false);
+
+  const toggleDarkMode = () => {
+    setIsDarkMode(!isDarkMode)
+    nightwind.toggle()
+  }
+  
   return (
     <>
     <Disclosure as="nav" className="shadow bg-white dark:bg-gray-900 text-black">
@@ -36,7 +43,7 @@ export default function Nav() {
                   <Link href="/">
                     <a>{siteConfig.title}</a>
                   </Link>
-                  <img src="fatcat-real.png" width={30} height={30} class="max-w-xs md:max-w-sm m-auto"/>
+                  <img src={"/fatcat-real.png"} width={30} height={30} class="max-w-xs md:max-w-sm m-auto" style={{filter: isDarkMode? "invert(100%)": ""}}/>
                 </div>
                 <div className="hidden sm:ml-6 sm:flex sm:space-x-8">
                   {/* Current: "border-indigo-500 text-gray-900", Default: "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700" */}
@@ -56,7 +63,7 @@ export default function Nav() {
                       </Link>
                     ))}
 
-                  <Toggle className="my-auto" onToggle={nightwind.toggle} />
+                  <Toggle className="my-auto" onToggle={toggleDarkMode} />
                 </div>
               </div>
             </div>

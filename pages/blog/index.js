@@ -11,13 +11,13 @@ import path from 'path'
 import matter from 'gray-matter'
 
 export default function index({posts}) {
-    console.log(posts);
+    //console.log(posts);
 
     const createElements = (items) => {
         let elements = [];
         items.forEach((x, y) => {
           elements.push(
-            <div key={`${y}-${Math.floor(Math.random() * 50)}`} ref={(ref) => refs.current.push(ref)}  className="blog-post m-4 flex flex-col bg-white shadow-lg border rounded-lg overflow-hidden">
+            <div key={`${y}-${Math.floor(Math.random() * 50)}`} ref={(ref) => refs.current.push(ref)}  className="blog-post m-4 flex flex-col bg-white dark:bg-gray-900 dark:shadow-2xl shadow-lg rounded-lg overflow-hidden">
                 <Link href={`/blog/${x.slug}`} >
                   <a className="group h-48 md:h-64 block bg-gray-100 overflow-hidden relative">
                   <img src={x.frontmatter.img? x.frontmatter.img : "https://images.unsplash.com/photo-1593508512255-86ab42a8e620?auto=format&q=75&fit=crop&w=600"} loading="lazy" alt="Photo by Minh Pham" className="w-full h-full object-cover object-center absolute inset-0 group-hover:scale-110 transition duration-200" />
@@ -34,11 +34,11 @@ export default function index({posts}) {
                 <div className="flex justify-between items-end mt-auto">
                     <div className="flex items-center gap-2">
                     <div className="w-10 h-10 shrink-0 bg-gray-100 rounded-full overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1611898872015-0571a9e38375?auto=format&q=75&fit=crop&w=64" loading="lazy" alt="Photo by Brock Wegner" className="w-full h-full object-cover object-center" />
+                        <img src={"ccavatar.png"} loading="lazy" alt="Photo by Brock Wegner" className="w-full h-full object-cover object-center" />
                     </div>
 
                     <div>
-                        <span className="block text-indigo-500">Mike Lane</span>
+                        <span className="block text-indigo-500">Christian Claudeaux</span>
                         <span className="block text-gray-400 text-sm">updated: {new Date(x.frontmatter.updated).toLocaleString()}</span>
                         <p className="block text-gray-400 text-sm">created: {new Date(x.frontmatter.created).toLocaleString()}</p>
                     </div>
