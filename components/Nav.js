@@ -7,6 +7,7 @@ import siteConfig from '../config/siteConfig.js'
 import navLinks from '../config/navLinks.js'
 import nightwind from "nightwind/helper"
 import Toggle from './bits/Toggle'
+import DarkToggle from './DarkToggle.js'
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
@@ -63,7 +64,8 @@ export default function Nav() {
                       </Link>
                     ))}
 
-                  <Toggle className="my-auto" onToggle={toggleDarkMode} />
+                  {/* <Toggle className="my-auto" onToggle={toggleDarkMode} /> */}
+                  <DarkToggle />
                 </div>
               </div>
             </div>
