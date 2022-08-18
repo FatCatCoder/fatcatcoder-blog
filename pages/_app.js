@@ -1,4 +1,4 @@
-import { useEffect, createContext} from 'react'
+import { useEffect, createContext, useState, useContext} from 'react'
 import Head from 'next/head'
 import Script from 'next/script'
 import { useRouter } from 'next/router'
@@ -14,23 +14,12 @@ import { TransitionProvider } from "../components/TransitionContext"
 import TransitionLayout from "../components/TransitionLayout"
 
 function MyApp({ Component, pageProps }) {
-  // useEffect(() => {
-  //   if(typeof(window) != undefined){
-  //     // window.document.documentElement.classList.add('dark');
-
-  //     // On page load or when changing themes, best to add inline in `head` to avoid FOUC
-  //     if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-  //       window.document.documentElement.classList.add('dark');
-  //     } else {
-  //       window.document.documentElement.classList.remove('dark')
-  //   }
-  //   //window.document.documentElement.classList.remove('dark');
-  //   }
-  // }, [])
+  const GlobalStore = useContext(StoreContext)
+  const [isDarkMode, setIsDarkMode] = useState(GlobalStore.isDarkMode);
 
   return (
     <>
-    <StoreContext.Provider value={Store}>
+    <StoreContext.Provider value={{isDarkMode, setIsDarkMode}}>
       <DefaultSeo
         titleTemplate={'%s | ' + siteConfig.title}
         defaultTitle={siteConfig.title}

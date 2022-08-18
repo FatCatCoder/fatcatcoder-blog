@@ -1,4 +1,4 @@
-import { useEffect, createContext} from 'react'
+import { useState, createContext} from 'react'
 
-export const Store = {isDarkMode: false};
+export const Store = { isDarkMode: false, setIsDarkMode: (bool) => {} };
 export const StoreContext = createContext(Store);
