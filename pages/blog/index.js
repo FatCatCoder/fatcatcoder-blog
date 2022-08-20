@@ -10,8 +10,9 @@ import fs from 'fs'
 import path from 'path'
 import matter from 'gray-matter'
 
+import SelectInput from '../../components/bits/SelectInput';
+
 export default function index({posts}) {
-    //console.log(posts);
 
     const createElements = (items) => {
         let elements = [];
@@ -54,6 +55,18 @@ export default function index({posts}) {
         return elements;
       };
 
+      const [selectedList, setSelectedList] = useState([]);
+
+      useEffect(() => {
+        let filteredPosts = selectedList.length === 0? posts : posts.filter((x) => {
+          if(x.frontmatter.tags.some(x => selectedList.includes(x)))
+            return true
+          else 
+            return false
+        })
+        setBlogs(createElements(filteredPosts));
+      }, [selectedList])
+
       const [blogs, setBlogs] = useState(createElements(posts));
       const [query, setQuery] = useState("")
       const refs = useRef([]);
@@ -63,11 +76,11 @@ export default function index({posts}) {
 
         refs.current = [];
 
-
-        let filteredPosts = posts.filter((x) => {
+        let filteredPosts = selectedList.length === 0 || query === ""? posts : posts.filter((x) => {
           if(x.frontmatter.title.toLowerCase().includes(text.toLowerCase()))
             return true
-            else return false
+          else 
+            return false
         })
 
         setQuery(text)
@@ -89,7 +102,7 @@ export default function index({posts}) {
                 },
                 x: 0,
                 duration: 1,
-                opacity: 1, // also tested without this line
+                opacity: 1,
               });
         })
       }, [refs, query])
@@ -107,8 +120,10 @@ export default function index({posts}) {
             Articles, tutorials, projects & other content...
           </p>
       </div> */}
-        <div class="relative shadow-xl">
-          <input onChange={search} value={query} type="text" id="rounded-email" class="rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" placeholder="Search"/>
+        <div class="relative shadow-xl grid grid-cols-2">
+          <input onChange={search} value={query} type="text"
+          class="rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" placeholder="Search" />
+          <SelectInput selectList={[...new Set(posts.flatMap(x => x.frontmatter.tags))]} getSelected={(x) => setSelectedList(x)}/>
         </div>
       </div>
 

@@ -91,7 +91,7 @@ export default function Home({ posts }) {
 
               {/* Terminal */}
               <div className="w-1/2 mx-auto invisible lg:visible">
-                <div className="w-9/12 xl:w-full shadow-2xl subpixel-antialiased rounded h-64 bg-black border-black mx-auto">
+                <div className="w-10/12 xl:w-full shadow-2xl subpixel-antialiased rounded h-64 bg-black border-black mx-auto">
                   <div className="flex items-center h-6 rounded-t bg-gray-100 border-b border-gray-500 text-center text-black" id="headerTerminal">
                     <div className="flex ml-2 items-center text-center border-red-900 bg-red-500 shadow-inner rounded-full w-3 h-3" id="closebtn">
                     </div>
