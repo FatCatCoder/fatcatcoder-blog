@@ -39,7 +39,7 @@ export default function Nav() {
                     <a>{siteConfig.title}</a>
                   </Link>
                   <img src={"/fatcat-real.png"} width={30} height={30} className="max-w-xs md:max-w-sm m-auto" 
-                       style={{filter: context.isDarkMode? "invert(100%)": ""}}/>
+                       style={{filter: context.isDarkMode? "invert(100%)": ""}} />
                 </div>
                 <div className="hidden sm:ml-6 sm:flex sm:space-x-8">
                   {/* Current: "border-indigo-500 text-gray-900", Default: "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700" */}

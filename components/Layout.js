@@ -1,11 +1,15 @@
 import Link from 'next/link'
 import Head from 'next/head'
 import { NextSeo } from 'next-seo'
+import {useContext} from 'react'
 
 import Nav from './Nav'
 import siteConfig from '../config/siteConfig'
+import {StoreContext} from './StoreContext'
+import react from 'react'
 
 export default function Layout({ children, title='' }) {
+  const context = useContext(StoreContext);
   return (
     <>
       <NextSeo
@@ -32,7 +36,7 @@ export default function Layout({ children, title='' }) {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <img src={siteConfig.authorLogo} alt={siteConfig.author} className="ml-2 h-6 block" />
+            <img src={siteConfig.authorLogo} alt={siteConfig.author} style={{filter: context.isDarkMode? "invert(100%)": ""}} className="ml-2 h-6 block" />
           </a>
         </p>
 

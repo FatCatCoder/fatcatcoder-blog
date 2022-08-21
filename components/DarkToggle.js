@@ -3,6 +3,8 @@ import nightwind from "nightwind/helper"
 import Toggle from './bits/Toggle'
 import { Store, StoreContext } from './StoreContext';
 
+import { FaSun, FaMoon } from 'react-icons/fa';
+
 export default function DarkToggle() {
     const {isDarkMode, setIsDarkMode} = useContext(StoreContext);
 
@@ -25,6 +27,9 @@ export default function DarkToggle() {
         nightwind.toggle()
     }
     return (
-        <Toggle className="my-auto" onToggle={toggleDarkMode} />
+      <>
+        {/* {(isDarkMode === true)? <FaMoon className='my-auto text-gray-200' /> : <FaSun className='my-auto text-yellow-500' />} */}
+        <Toggle className="my-auto" onToggle={toggleDarkMode} icon={(isDarkMode === true)? <FaMoon className='my-auto text-gray-200' /> : <FaSun className='my-auto text-yellow-500' />} />
+      </>
     )
 }
