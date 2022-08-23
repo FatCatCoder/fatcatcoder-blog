@@ -118,7 +118,10 @@ export default function Home({ posts }) {
         <div className="max-w-screen-2xl px-4 md:px-8 mx-auto">
           <div className="mb-10 md:mb-16">
             <h2 className="text-gray-800 text-2xl lg:text-3xl font-bold text-center mb-4 md:mb-6">Recent Posts</h2>
-            <p className="max-w-screen-md text-gray-500 md:text-lg text-center mx-auto">This is a section of some simple filler text, also known as placeholder text. It shares some characteristics of a real written text but is random or otherwise generated.</p>
+            <p className="max-w-screen-md text-gray-500 md:text-lg text-center mx-auto">              
+              Curated editorials comprised of tutorials, tips, discussions, and investigations on technology, tools, and 
+              infrequently various personal interests. Begin browsing the latest selection of deliberations & musings.
+              </p>
           </div>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6 xl:gap-8">
@@ -128,7 +131,7 @@ export default function Home({ posts }) {
                   <img src={x.frontmatter.img} loading="lazy" alt="Photo by Minh Pham" className="w-full h-full object-cover object-center absolute inset-0 group-hover:scale-110 transition duration-200" />
                   <div className="bg-gradient-to-t from-gray-800 md:via-transparent to-transparent absolute inset-0 pointer-events-none"></div>
                   <div className="relative p-4 mt-auto">
-                    <span className="block text-gray-200 dark:text-gray-400 text-sm">{x.frontmatter.created}</span>
+                    <span className="block text-gray-200 dark:text-gray-400 text-sm">{new Date(x.frontmatter.updated).toLocaleString()}</span>
                     <h2 className="text-white dark:text-gray-200 text-xl font-semibold transition duration-100 mb-2">{x.frontmatter.title}</h2>
                     <span className="text-indigo-300 font-semibold">Read more</span>
                   </div>

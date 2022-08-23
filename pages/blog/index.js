@@ -11,44 +11,24 @@ import path from 'path'
 import matter from 'gray-matter'
 
 import SelectInput from '../../components/bits/SelectInput';
+import BlogCard from '../../components/bits/BlogCard';
 
 export default function index({posts}) {
-
     const createElements = (items) => {
         let elements = [];
         items.forEach((x, y) => {
           elements.push(
-            <div key={`${y}-${Math.floor(Math.random() * 50)}`} ref={(ref) => refs.current.push(ref)}  className="blog-post m-4 flex flex-col bg-white dark:bg-gray-900 dark:shadow-2xl shadow-lg rounded-lg overflow-hidden">
-                <Link href={`/blog/${x.slug}`} >
-                  <a className="group h-48 md:h-64 block bg-gray-100 overflow-hidden relative">
-                  <img src={x.frontmatter.img? x.frontmatter.img : "https://images.unsplash.com/photo-1593508512255-86ab42a8e620?auto=format&q=75&fit=crop&w=600"} loading="lazy" alt="Photo by Minh Pham" className="w-full h-full object-cover object-center absolute inset-0 group-hover:scale-110 transition duration-200" />
-                  </a>
-                </Link>
-
-                <div className="flex flex-col flex-1 p-4 sm:p-6">
-                <h2 className="text-gray-800 text-lg font-semibold mb-2">
-                    <Link href={`/blog/${x.slug}`}><a className="hover:text-indigo-500 active:text-indigo-600 transition duration-100">{x.frontmatter.title}</a></Link>
-                </h2>
-
-                <p className="text-gray-500 mb-8">{x.frontmatter.description}</p>
-
-                <div className="flex justify-between items-end mt-auto">
-                    <div className="flex items-center gap-2">
-                    <div className="w-10 h-10 shrink-0 bg-gray-100 rounded-full overflow-hidden">
-                        <img src={"ccavatar.png"} loading="lazy" alt="Photo by Brock Wegner" className="w-full h-full object-cover object-center" />
-                    </div>
-
-                    <div>
-                        <span className="block text-indigo-500">Christian Claudeaux</span>
-                        <span className="block text-gray-400 text-sm">updated: {new Date(x.frontmatter.updated).toLocaleString()}</span>
-                        <p className="block text-gray-400 text-sm">created: {new Date(x.frontmatter.created).toLocaleString()}</p>
-                    </div>
-                    </div>
-
-                    {x?.frontmatter?.tags?.map(tag => (<span className="text-gray-500 text-sm border rounded px-2 py-1">{tag}</span>))}
-                </div>
-                </div>
-            </div>
+            <BlogCard 
+              key={`${y}-${Math.floor(Math.random() * 50)}`} 
+              ref={(ref) => refs.current.push(ref)} 
+              slug={`/blog/${x.slug}`}
+              img={x.frontmatter.img}
+              title={x.frontmatter.title}
+              desc={x.frontmatter.description}
+              created={x.frontmatter.created}
+              updated={x.frontmatter.updated}
+              tags={x.frontmatter.tags}
+              />
           );
         }); 
 
@@ -56,6 +36,10 @@ export default function index({posts}) {
       };
 
       const [selectedList, setSelectedList] = useState([]);
+      const [blogs, setBlogs] = useState(createElements(posts));
+      const [query, setQuery] = useState("")
+      const refs = useRef([]);
+
 
       useEffect(() => {
         let filteredPosts = selectedList.length === 0? posts : posts.filter((x) => {
@@ -64,27 +48,24 @@ export default function index({posts}) {
           else 
             return false
         })
-        setBlogs(createElements(filteredPosts));
-      }, [selectedList])
 
-      const [blogs, setBlogs] = useState(createElements(posts));
-      const [query, setQuery] = useState("")
-      const refs = useRef([]);
-      
-      const search = (e) => {
-        let text = e.target.value
-
-        refs.current = [];
-
-        let filteredPosts = selectedList.length === 0 || query === ""? posts : posts.filter((x) => {
-          if(x.frontmatter.title.toLowerCase().includes(text.toLowerCase()))
+        filteredPosts = query === ""? filteredPosts : filteredPosts.filter((x) => {
+          if(x.frontmatter.title.toLowerCase().includes(query.toLowerCase()))
             return true
           else 
             return false
         })
 
-        setQuery(text)
+
+
         setBlogs(createElements(filteredPosts));
+      }, [selectedList, query])
+      
+      const search = (e) => {
+        let text = e.target.value
+        setQuery(text)
+        
+        refs.current = [];
       }
     
 
@@ -111,7 +92,7 @@ export default function index({posts}) {
     <>
     <FadeInOut x={-20} delay={2}>
     
-      <div class="container p-8 mx-auto">
+      <div class="container py-8 mx-auto">
         {/* <div class="mb-10 md:mb-16">
           <h2 class="text-gray-800 text-2xl lg:text-3xl font-bold text-center mb-4 md:mb-6">
             Blog
@@ -120,15 +101,15 @@ export default function index({posts}) {
             Articles, tutorials, projects & other content...
           </p>
       </div> */}
-        <div class="relative shadow-xl grid grid-cols-2">
+        <div class="relative shadow-xl grid grid-cols-12">
           <input onChange={search} value={query} type="text"
-          class="rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" placeholder="Search" />
-          <SelectInput selectList={[...new Set(posts.flatMap(x => x.frontmatter.tags))]} getSelected={(x) => setSelectedList(x)}/>
+          class="col-span-8 rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" placeholder="Search" />
+          <SelectInput className="col-span-4" selectList={[...new Set(posts.flatMap(x => x.frontmatter.tags))]} getSelected={(x) => setSelectedList(x)} placeholder={"Select Tags"} />
         </div>
       </div>
 
       <div class="container mx-auto">
-        <div class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-2 gap-4 md:gap-6 xl:gap-8">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-6 xl:gap-8">
             {blogs}
         </div>
       </div>

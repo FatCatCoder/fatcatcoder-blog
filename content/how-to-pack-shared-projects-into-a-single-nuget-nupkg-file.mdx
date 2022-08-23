@@ -13,6 +13,7 @@ featured: true
 Lets say you have a dotnet solution containg more than one project. You need to pack these projects into a single
 nuget file. 
 
+
 ```bash
 .
 ├── MySharedProject/
@@ -36,17 +37,10 @@ nuget file.
   <!-- Some other installed Nugets -->
 
   <ItemGroup>
-    <ProjectReference  Include="..\LibraryProject.Data\LibraryProject.Data.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-	  <ProjectReference Include="..\LibraryProject.Data\LibraryProject.Data.csproj">
-		  <ReferenceOutputAssembly>true</ReferenceOutputAssembly>
-		  <IncludeAssets>LibraryProject.Data.dll</IncludeAssets>
-	  </ProjectReference>
+    <ProjectReference Include="..\LibraryProject.Data\LibraryProject.Data.csproj" />
   </ItemGroup>
 	
-<Target DependsOnTargets="ResolveReferences" Name="CopyProjectReferencesToPackage">
+  <Target DependsOnTargets="ResolveReferences" Name="CopyProjectReferencesToPackage">
     <ItemGroup>
       <BuildOutputInPackage Include="@(ReferenceCopyLocalPaths->WithMetadataValue('ReferenceSourceTarget', 'ProjectReference'))"/>
     </ItemGroup>
@@ -57,19 +51,23 @@ nuget file.
 ## Deep Dives 🌊
 What the !%#&@ is *[TargetsForTfmSpecificBuildOutput](https://docs.microsoft.com/en-us/nuget/reference/msbuild-targets#targetsfortfmspecificbuildoutput)*???
 
-*Adds .dlls from a path into the .nupkg file (which to put crudely, a zip folder with metadata)*
-<Quoteblock body={"Adds .dlls from a path into the .nupkg file (which to put crudely, a zip folder with metadata)"} />
+<Quoteblock body={"Adds files (ie .dlls) from a path into the .nupkg file"} />
 
-The other two item groups are msbuild variations to ensure that TargetsForTfmSpecificBuildOutput collects the correct
+The Target & "BuildOutputInPackage" ensures that TargetsForTfmSpecificBuildOutput collects the correct
 .dll file AND all of its own references! hate to be missing a third data package nested inside out lovely LibraryProject.Data.csproj
 
 
+## Testing
+A great way to see it works without directly importing it into another libary is to use 
+[Nuget Package Explorer](https://github.com/NuGetPackageExplorer/NuGetPackageExplorer)
+
+After packaging, open the .nupkg file using this tool to see whats contained the the bundle.
+If everything is there then we have successfully made our lives simpler 😊
+
 ### HOW DEEP DOES IT GO?
 
-As far as you're little heart can carry you. Really that means you should look into MSBuild Targets.
-A Target groups tasks to be ran together at a certain build stage. 
+A MSbuild "Target" groups tasks to be ran together at a certain build stage. 
 You can reference MSB variables in these targets to do cool things like the "ReferenceCopyLocalPaths" var allows you
 to gather the array of matched items and operate on it (in our case pack them into a single nuget for portability!)
-
 
 <ProfileCard />

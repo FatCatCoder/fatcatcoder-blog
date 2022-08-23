@@ -3,7 +3,7 @@ import { Listbox, Transition } from '@headlessui/react'
 import { CheckIcon, SelectorIcon } from '@heroicons/react/solid'
 
 
-export default function SelectInput({selectList, getSelected}) {
+export default function SelectInput({className, selectList, getSelected, placeholder}) {
   const [selected, setSelected] = useState([])
 
   useEffect(() => {
@@ -11,11 +11,11 @@ export default function SelectInput({selectList, getSelected}) {
   }, [selected])
 
   return (
-    <div>
+    <div className={className}>
       <Listbox value={selected} onChange={setSelected} multiple>
         <div className="relative my-auto">
           <Listbox.Button class="rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" placeholder="Select">
-            <span className={`block truncate ${selected.length !== 0? "": "dark:text-gray-400 text-gray-400"}`}>{selected.length !== 0? selected.join(', '): "Select Tags"}</span>
+            <span className={`block truncate ${selected.length !== 0? "": "dark:text-gray-400 text-gray-400"}`}>{selected.length !== 0? selected.join(', '): placeholder !== null ? placeholder : "Select"}</span>
             <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
               <SelectorIcon
                 className="h-5 w-5 text-gray-400"
