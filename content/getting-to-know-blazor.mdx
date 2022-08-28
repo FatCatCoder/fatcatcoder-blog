@@ -1,0 +1,55 @@
+---
+id: 2
+title: Getting To Know Blazor
+description: Buckle up your typesafe seatbeat with this MVC framework by Microsoft (C#)
+created: "2022-08-23T10:02:00Z"
+updated: "2022-06-23T10:02:00Z"
+img: https://images.unsplash.com/photo-1592878940526-0214b0f374f6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80
+tags: ["C#", "Blazor", "Microsoft", "Frontend"]
+featured: false
+---
+
+```csharp
+<div>
+    <h1 style="width: 100%">
+        @GreetingMessage
+    </h1>
+    <p>This is blazor</p>
+</div>
+
+@code{
+    [Parameter]
+    public string GreetingMessage { get; set; }
+
+    protected override void OnInitialized()
+    {
+        if(GreetingMessage == "Hello World")
+        {
+            Console.WriteLine("Using default greeting!");
+        }
+    }
+}
+```
+
+## What is Blazor?
+Blazor is a MVC framework utilizing the .Net Core Framework. 
+Its capable of native, hybrid, and webassembly apps, which means its client side, serverside, desktop, and pwa friendly all at once! 
+Following the typical patterns of modern MVC practices, if you're coming from another framework like angular or old-school class based react 
+then blazor will still feel like home. Component based arithecture via templating and composition, life-cycle rending methods, and dynamic UIs makes 
+this framework just as comfortable as anything else. 
+
+*cool*
+
+### Why Should I Care?
+Blazor gives you the ablity to build with HTML, CSS, Javascript, and C#
+which gives you all the benefits of a strong typesafe OOP language along side the webdev trio. If you're already building with other 
+Microsoft tools like .Net Api or some sort of custom library then blazor allows code resuse between your frontend code and other .Net Code   
+
+### Getting Started
+
+[Read the Microsoft Offical Documentation!](https://docs.microsoft.com/en-us/aspnet/core/blazor/?view=aspnetcore-6.0)
+ 
+The official docs explain almost everything you need to know. However, there are some confusing parts when it comes to more advanced topics
+such as client side auth and state management which I'll cover in detail in future posts.  
+
+<ProfileCard />

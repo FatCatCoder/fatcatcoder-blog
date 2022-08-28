@@ -25,13 +25,18 @@ export default function BlogCard({img, slug, title, desc, created, updated, tags
 
                     <div>
                         <span className="block text-indigo-500">Christian Claudeaux</span>
-                        <p className="block text-gray-400 text-sm">{new Date(updated).toLocaleString()}</p>
-                        {/* <p className="block text-gray-400 text-sm">updated: {new Date(updated).toLocaleString()}</p>
-                        <p className="block text-gray-400 text-sm">created: {new Date(created).toLocaleString()}</p> */}
+                        <p className="block text-gray-400 text-sm">{new Date(updated).toLocaleString()}</p>                        
                     </div>
                     </div>
 
-                    <div className='flex'>{tags.map(tag => (<span className="text-gray-500 text-sm border rounded px-2 py-1">{tag}</span>))}</div>
+                    <div className='flex mx-2'>{tags.map((tag, idx) => 
+                      {
+                        if(idx <= 3){
+                          return (<span className="text-gray-500 text-xs md:text-sm border rounded px-2 py-1">{tag}</span>)
+                        }
+                      }
+                    )}
+                  </div>
                 </div>
                 </div>
             </div>

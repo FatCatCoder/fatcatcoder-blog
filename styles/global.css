@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 @layer base {
-    h2 {
+    h1, h2, h3, h4, h5, h6 {
       @apply text-white;
       @apply dark:text-gray-200;
     }
@@ -12,3 +12,9 @@
       @apply dark:text-blue-600;
     }
   }
+
+@media screen and (max-width: 650px){
+  pre.prism-code{
+    font-size: .55rem !important;
+  }
+}

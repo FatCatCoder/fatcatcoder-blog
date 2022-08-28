@@ -1,4 +1,5 @@
 const rehypePrism = require('@mapbox/rehype-prism');
+// const optimizedImages = require('next-optimized-images');
 
 const withMDX = require('@next/mdx')({
     extension: /\.mdx?$/,
@@ -12,4 +13,5 @@ const withMDX = require('@next/mdx')({
   module.exports = withMDX({
     // Append the default value with md extensions
     pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
+    target: 'serverless'
   })

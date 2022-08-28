@@ -26,6 +26,7 @@ function MyApp({ Component, pageProps }) {
         description={siteConfig.description}
         {...siteConfig.nextSeo}
       />
+      <base href="/fatcatcoder"></base>
       <Head>
       <script dangerouslySetInnerHTML={{ __html: nightwind.init() }} />
       </Head>

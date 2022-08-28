@@ -21,6 +21,10 @@ const components = {
 
 export default function MdxPage({ children, source, frontMatter }) {
   return (
+    <>
+    <Head>
+      <title>{frontMatter.title}</title>
+    </Head>
     <article className="prose mx-auto p-6 min-w-[45vw] text-black dark:text-gray-200">
       <header>
         <div className="mb-6">
@@ -31,11 +35,18 @@ export default function MdxPage({ children, source, frontMatter }) {
           {frontMatter.description && (
             <p className="description text-black dark:text-gray-200">{frontMatter.description}</p>
           )}
+          {frontMatter.description && (
+            <p className="description text-[.65rem] text-gray-400 dark:text-gray-500">
+              Created: {new Date(frontMatter.created).toLocaleString()} \
+              Updated: {new Date(frontMatter.updated).toLocaleString()}
+            </p>
+          )}
         </div>
       </header>
       <section>
         <MDXRemote {...source} components={{...components}} />
       </section>
     </article>
+    </>
   )
 }
