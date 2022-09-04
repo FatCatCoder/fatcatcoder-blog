@@ -18,3 +18,9 @@
     font-size: .55rem !important;
   }
 }
+
+.rainbow-text {
+  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}

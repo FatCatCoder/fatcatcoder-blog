@@ -8,6 +8,7 @@ import navLinks from '../config/navLinks.js'
 import nightwind from "nightwind/helper"
 import Toggle from './bits/Toggle'
 import DarkToggle from './DarkToggle.js'
+import {imgPathFormatter} from "../lib/utils"
 
 import {Store, StoreContext} from '../components/StoreContext'
 
@@ -38,7 +39,7 @@ export default function Nav() {
                   <Link href="/">
                     <a>{siteConfig.title}</a>
                   </Link>
-                  <img src={"/fatcat-real.png"} width={30} height={30} className="max-w-xs md:max-w-sm m-auto" 
+                  <img src={imgPathFormatter("/fatcat-real.png")} width={30} height={30} className="max-w-xs md:max-w-sm m-auto" 
                        style={{filter: context.isDarkMode? "invert(100%)": ""}} />
                 </div>
                 <div className="hidden sm:ml-6 sm:flex sm:space-x-8">

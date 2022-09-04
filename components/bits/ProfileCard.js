@@ -2,6 +2,7 @@ import React from 'react'
 import siteConfig from '../../config/siteConfig'
 import {BsStackOverflow} from "react-icons/bs"
 import Link from 'next/link';
+import {imgPathFormatter} from "../../lib/utils"
 
 export default function ProfileCard() {
   return (
@@ -9,7 +10,7 @@ export default function ProfileCard() {
 <div class="p-4">
     <div class="text-center mb-4 opacity-90">
         <Link href="/about" class="block relative">
-            <img alt="profil" src={"/ccavatar.png"} class="mx-auto object-cover rounded-full h-40 w-40 "/>
+            <img alt="profil" src={imgPathFormatter("/ccavatar.png")} class="mx-auto object-cover rounded-full h-40 w-40 "/>
         </Link>
     </div>
     <div class="text-center">

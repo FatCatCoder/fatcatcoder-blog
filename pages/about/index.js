@@ -7,6 +7,8 @@ import { FaReact, FaCat, FaHeart } from "react-icons/fa";
 
 import { Transition } from '@headlessui/react'
 
+import {imgPathFormatter} from '../../lib/utils';
+
 
 export default function About() {
   const [isShowing, setIsShowing] = useState(false)
@@ -45,7 +47,7 @@ export default function About() {
     <FadeInOut x={-20} delay={2}>
       <section class="text-gray-600 body-font">
         <div class="container mx-auto flex px-5 py-24 items-center justify-center flex-col">
-          <a href="https://fatcatart.com/"><img style={{objectFit: "cover", borderRadius: "50%", height: 350, width: 350}} width={350} height={350} src="sirfatcat.jpg" class="mb-10" alt="hero" /></a>
+          <a href="https://fatcatart.com/"><img style={{objectFit: "cover", borderRadius: "50%", height: 350, width: 350}} width={350} height={350} src={imgPathFormatter(`/sirfatcat.jpg`)} class="mb-10" alt="hero" /></a>
           <div class="text-center lg:w-2/3 w-full">
             <h1 class="title-font sm:text-4xl text-3xl mb-4 font-medium text-gray-900">About</h1>
             <blockquote class="text-gray-500 sm:text-lg italic border-l-4 pl-4 md:pl-6 mb-6 md:mb-8">

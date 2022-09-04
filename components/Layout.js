@@ -8,6 +8,8 @@ import siteConfig from '../config/siteConfig'
 import {StoreContext} from './StoreContext'
 import react from 'react'
 
+import {imgPathFormatter} from "../lib/utils"
+
 export default function Layout({ children, title='' }) {
   const context = useContext(StoreContext);
   return (
@@ -36,7 +38,7 @@ export default function Layout({ children, title='' }) {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <img src={siteConfig.authorLogo} alt={siteConfig.author} style={{filter: context.isDarkMode? "invert(100%)": ""}} className="ml-2 h-6 block" />
+            <img src={imgPathFormatter(siteConfig.authorLogo)} alt={siteConfig.author} style={{filter: context.isDarkMode? "invert(100%)": ""}} className="ml-2 h-6 block" />
           </a>
         </p>
 

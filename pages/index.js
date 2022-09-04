@@ -104,7 +104,7 @@ export default function Home({ posts }) {
                     </div>
 
                   </div>
-                  <div className="pl-1 pt-1 h-auto  text-green-200 font-mono text-xs bg-black" id="console">
+                  <div className="rainbow-text pl-1 pt-1 h-auto  text-green-200 font-mono text-xs bg-black" id="console">
                     <p className="pb-1">Last login: Wed Sep 25 09:11:04 on ttys001</p>
                     <p className="pb-1">FatCat@devprojects fatcat~$ docker ps</p>
                   </div>
@@ -128,7 +128,7 @@ export default function Home({ posts }) {
             {posts.map((x, y) => (
               <Link key={x.slug} href={`/blog/${x.slug}`}>
                 <a className="group h-48 md:h-64 xl:h-96 flex flex-col bg-gray-100 rounded-lg shadow-lg overflow-hidden relative">
-                  <img src={x.frontmatter.img} loading="lazy" alt="Photo by Minh Pham" className="w-full h-full object-cover object-center absolute inset-0 group-hover:scale-110 transition duration-200" />
+                  <img src={x.frontmatter.img} loading="lazy" className="w-full h-full object-cover object-center absolute inset-0 group-hover:scale-110 transition duration-200" />
                   <div className="bg-gradient-to-t from-gray-800 md:via-transparent to-transparent absolute inset-0 pointer-events-none"></div>
                   <div className="relative p-4 mt-auto">
                     <span className="block text-gray-200 dark:text-gray-400 text-sm">{new Date(x.frontmatter.updated).toLocaleString()}</span>

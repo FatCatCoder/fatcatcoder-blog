@@ -13,6 +13,8 @@ import matter from 'gray-matter'
 import SelectInput from '../../components/bits/SelectInput';
 import BlogCard from '../../components/bits/BlogCard';
 
+import {imgPathFormatter} from '../../lib/utils';
+
 export default function index({posts}) {
     const createElements = (items) => {
         let elements = [];
@@ -22,7 +24,7 @@ export default function index({posts}) {
               key={`${y}-${Math.floor(Math.random() * 50)}`} 
               ref={(ref) => refs.current.push(ref)} 
               slug={`/blog/${x.slug}`}
-              img={x.frontmatter.img}
+              img={imgPathFormatter(x.frontmatter.img)}
               title={x.frontmatter.title}
               desc={x.frontmatter.description}
               created={x.frontmatter.created}

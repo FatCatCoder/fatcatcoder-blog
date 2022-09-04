@@ -2,9 +2,9 @@ import { MDXRemote } from 'next-mdx-remote'
 import dynamic from 'next/dynamic'
 import Head from 'next/head'
 import Link from 'next/link'
-import { CopyBlock } from "react-code-blocks";
 
-import Quote  from '../components/bits/Quote'
+
+import { CopyBlock } from "react-code-blocks";
 import Quoteblock  from '../components/bits/Quoteblock'
 import ProfileCard from "../components/bits/ProfileCard"
 import SyntaxHighlighter from './SyntaxHighlighter';
@@ -12,7 +12,6 @@ import SyntaxHighlighter from './SyntaxHighlighter';
 
 const components = {
   Head,
-  Quote: Quote,
   Quoteblock: Quoteblock,
   ProfileCard: ProfileCard,
   CopyBlock: CopyBlock,

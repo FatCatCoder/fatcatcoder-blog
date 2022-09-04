@@ -10,8 +10,26 @@ const withMDX = require('@next/mdx')({
       providerImportSource: "@mdx-js/react",
     },
   })
-  module.exports = withMDX({
+  
+module.exports = withMDX({
     // Append the default value with md extensions
     pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
-    target: 'serverless'
+    basePath: process.env.BASE_PATH,
+    publicRuntimeConfig: { basePath: process.env.BASE_PATH || '' }
   })
+
+
+
+//   module.exports = {
+//     basePath: '/fatcatcoder',
+//     async redirects() {
+//         return [
+//             {
+//                 source: '/',
+//                 destination: '/fatcatcoder',
+//                 basePath: false,
+//                 permanent: false
+//             }
+//         ]
+//     }
+//   };

@@ -35,7 +35,7 @@ function MyApp({ Component, pageProps }) {
       <TransitionLayout>
         
       <Layout title={pageProps.title}>
-        <Component {...pageProps} />
+        <Component {...pageProps} base="fatcatcoder" />
       </Layout>
 
       </TransitionLayout>
