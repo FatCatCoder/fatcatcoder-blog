@@ -5,7 +5,7 @@ description: Ever get that feeling your doing too much work and missing out on t
 created: "2022-06-06T15:02:00Z"
 updated: "2022-06-06T15:02:00Z"
 img: https://images.unsplash.com/photo-1649451844808-b81427e7a1f9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80
-tags: ["C#", "dotnet", "nuget", "devops"]
+tags: ["C#", "dotnet", "nuget", "devops", "productivity"]
 featured: true
 ---
 
@@ -23,7 +23,7 @@ nuget file.
 └── MySharedProject.sln
 ```
 
-## HOW
+## <AnchorHeading text={"HOW"} />
 ```xml
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
@@ -48,7 +48,7 @@ nuget file.
 </Project>
 ```
 
-## Deep Dives 🌊
+## <AnchorHeading text={"Deep Dives 🌊"} />
 What the !%#&@ is *[TargetsForTfmSpecificBuildOutput](https://docs.microsoft.com/en-us/nuget/reference/msbuild-targets#targetsfortfmspecificbuildoutput)*???
 
 <Quoteblock body={"Adds files (ie .dlls) from a path into the .nupkg file"} />
@@ -57,15 +57,14 @@ The Target & "BuildOutputInPackage" ensures that TargetsForTfmSpecificBuildOutpu
 .dll file AND all of its own references! hate to be missing a third data package nested inside out lovely LibraryProject.Data.csproj
 
 
-## Testing
+## <AnchorHeading text={"Testing"} />
 A great way to see it works without directly importing it into another libary is to use 
 [Nuget Package Explorer](https://github.com/NuGetPackageExplorer/NuGetPackageExplorer)
 
 After packaging, open the .nupkg file using this tool to see whats contained the the bundle.
 If everything is there then we have successfully made our lives simpler 😊
 
-### HOW DEEP DOES IT GO?
-
+### <AnchorHeading text={"HOW DEEP DOES IT GO?"} />
 A MSbuild "Target" groups tasks to be ran together at a certain build stage. 
 You can reference MSB variables in these targets to do cool things like "ReferenceCopyLocalPaths" allows you
 to gather the array of matched items and operate on it (in our case pack them into a single nuget for portability!)

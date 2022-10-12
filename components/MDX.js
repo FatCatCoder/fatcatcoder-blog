@@ -7,7 +7,9 @@ import Link from 'next/link'
 import { CopyBlock } from "react-code-blocks";
 import Quoteblock  from '../components/bits/Quoteblock'
 import ProfileCard from "../components/bits/ProfileCard"
+import AnchorHeading from "../components/bits/AnchorHeading"
 import SyntaxHighlighter from './SyntaxHighlighter';
+import { useEffect, useLayoutEffect } from 'react';
 
 
 const components = {
@@ -15,10 +17,17 @@ const components = {
   Quoteblock: Quoteblock,
   ProfileCard: ProfileCard,
   CopyBlock: CopyBlock,
-  code: SyntaxHighlighter
+  code: SyntaxHighlighter,
+  AnchorHeading: AnchorHeading
 }
 
 export default function MdxPage({ children, source, frontMatter }) {
+  useEffect(() => {
+    if(window?.location?.hash?.length > 1){
+      console.log(window.location.hash.substring(1));
+      document.getElementById(window.location.hash.substring(1)).scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"});
+    }
+  }, [])
   return (
     <>
     <Head>
